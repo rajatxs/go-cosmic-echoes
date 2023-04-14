@@ -1,0 +1,27 @@
+{
+   "headers": [
+      {
+         "source": "/(.*)",
+         "headers": [
+            {
+               "key": "Access-Control-Allow-Origin",
+               "value": "*"
+            },
+            {
+               "key": "Access-Control-Allow-Methods",
+               "value": "GET, HEAD, OPTIONS"
+            },
+            {
+               "key": "Access-Control-Allow-Headers",
+               "value": "X-Client-Id, Content-Type"
+            }
+         ]
+      }
+   ],
+   "rewrites": [
+      {
+         "source": "/sitemeta",
+         "destination": "/api/sitemeta"
+      }
+   ]
+}
