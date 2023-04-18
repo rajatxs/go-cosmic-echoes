@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+   <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png" />
+   <meta name="msapplication-TileColor" content="#000000" />
+   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+   <meta name="theme-color" content="#000000" />
+   <title>Cosmic Echoes</title>
+   <meta name="description" content="Collection of common APIs" />
+   <style type="text/css">
+      html, body {
+         font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         width: 100vw;
+         height: 100vh;
+         overflow: hidden;
+         background-color: #000;
+         color: #FFF;
+      }
+      header {
+         display: inline-block;
+         padding: 2rem;
+         background-color: #000;
+         border-radius: 50px;
+         z-index: 100;
+      }
+      header > .title {
+         margin: 0;
+         font-size: 5rem;
+      }
+      .star {
+         position: fixed;
+         border-radius: 50%;
+         z-index: 50;
+         animation-name: star-blinking;
+         animation-iteration-count: infinite;
+      }
+      
+      @keyframes star-blinking {
+         from {
+            opacity: 1;
+         } 
+         50% {
+            opacity: 0.4;
+         }
+         to {
+            opacity: 1;
+         }
+      }
+   </style>
+</head>
+<body>
+   <header>
+      <h1 class="title"><span class="token-1">Cosmic</span> <span class="token-2">Echoes</span></h1>
+   </header>
+   <div id="void-space"></div>
+</body>
+<script>
+   (function() {
+      const voidSpaceElement = document.getElementById('void-space');
+      const starColors = [
+         '#FFF',
+         '#FFE8E8',
+         '#FFFABF',
+         '#DDD9FF',
+      ];
+
+      function addNewStar() {
+         const star = document.createElement('div');
+         const xPos = Math.floor(Math.random() * window.innerWidth);
+         const yPos = Math.floor(Math.random() * window.innerHeight);
+         const colorIndex = Math.floor(Math.random() * starColors.length);
+         const size = Math.floor(Math.random() * 8 + 1);
+         const animDuration = Number(Math.random() * 4 + 1).toFixed(2);
+
+         star.classList.add('star');
+         star.style.width = `${size}px`;
+         star.style.height = `${size}px`;
+         star.style.left = `${xPos}px`;
+         star.style.top = `${yPos}px`;
+         star.style.animationDuration = `${animDuration}s`;
+         star.style.backgroundColor = starColors[colorIndex] || '#FFF';
+         voidSpaceElement.appendChild(star);
+      }
+
+      window.onload = function() {
+         const MAX_STAR_COUNT = 100;
+         const DEFAULT_INTERVAL = 100;
+         let starCount = 0;
+
+         const timer = setInterval(() => {
+            if (starCount < MAX_STAR_COUNT) {
+               addNewStar();
+            } else {
+               clearInterval(timer);
+            }
+            starCount++;
+         }, DEFAULT_INTERVAL);
+      }
+   }());
+</script>
+</html>
